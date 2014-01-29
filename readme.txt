@@ -44,6 +44,8 @@ if(function_exists('get_subcribe_link')){ get_subcribe_link();	}
 
 = 1.0 =
 * Initial release.
+= 1.1 =
+* english translation support added
 
 == Upgrade Notice ==
 
