@@ -8,6 +8,7 @@ Author: Gowri Sankar Ramasamy
 Author URI: http://code-cocktail.in/author/gowrisankar/
 Donate link: http://code-cocktail.in/donate-me/
 License: GPL2
+Text Domain: wp-subscribe-author
 */
 
 /*  
@@ -31,7 +32,7 @@ License: GPL2
 // loads language files
 
 function wpsa_init() {	
- load_plugin_textdomain('wp-sub-auth', false, basename( dirname( __FILE__ ) ) . '/languages' );
+ load_plugin_textdomain('wp-subscribe-author', false, basename( dirname( __FILE__ ) ) . '/languages' );
 }
 add_action('plugins_loaded', 'wpsa_init');
 
@@ -665,7 +666,7 @@ $emailtemplate = <<<EOD
                                                     <tr>
                                                         <td colspan="2" valign="middle" id="utility">
                                                             <div mc:edit="std_utility">
-                                                                &nbsp;<a href="$author_url">unsubscribe from this list</a>
+                                                                &nbsp;<a href="$author_url">'.__('unsubscribe from this list','wp-subscribe-author').'</a>
                                                             </div>
                                                         </td>
                                                     </tr>
