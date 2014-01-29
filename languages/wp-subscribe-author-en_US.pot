@@ -1,0 +1,44 @@
+# Copyright (C) 2014 Wp Subscribe Author
+# This file is distributed under the same license as the Wp Subscribe Author package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Wp Subscribe Author 1.0\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-subscribe-author\n"
+"POT-Creation-Date: 2014-01-29 12:02:51+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2014-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: wp-subscribe-author.php:174
+msgid "Unsubscribe "
+msgstr ""
+
+#: wp-subscribe-author.php:177
+msgid "Subscribe "
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Wp Subscribe Author"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://wordpress.org/extend/plugins/wp-subscribe-author/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"Wp Subscribe Author plugin is help subscriber to follow his/her favourite "
+"author. Once subscriber starts follow the author, he will get notified all "
+"new post of author by email."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Gowri Sankar Ramasamy"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://code-cocktail.in/author/gowrisankar/"
+msgstr ""

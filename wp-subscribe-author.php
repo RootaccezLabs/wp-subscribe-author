@@ -3,7 +3,7 @@
 Plugin Name: Wp Subscribe Author
 Plugin URI: http://wordpress.org/extend/plugins/wp-subscribe-author/
 Description: Wp Subscribe Author plugin is help subscriber to follow his/her favourite author. Once subscriber starts follow the author, he will get notified all new post of author by email.
-Version: 1.0
+Version: 1.1
 Author: Gowri Sankar Ramasamy
 Author URI: http://code-cocktail.in/author/gowrisankar/
 Donate link: http://code-cocktail.in/donate-me/
@@ -171,10 +171,10 @@ function get_subcribe_link(){
  if(get_current_user_id() != get_the_author_meta( "ID" ) && get_current_user_id() != 0){
 	       if(is_user_subscribed(get_the_author_meta( "ID" ),get_current_user_id())){
 	       
-	       printf('<a href="javascript:void(0);" class="wp-subcribe-author-url subscribed" title=" %4$d Subscribers | %5$d posts " data-author="%2$s" data-subscriber="%3$s">%1$s</a>','Unsubscribe '.esc_attr( get_the_author() ),get_the_author_meta( "ID" ) ,get_current_user_id(),get_num_subscribers(get_the_author_meta( "ID" )),number_format_i18n( get_the_author_posts() ));	
+	       printf('<a href="javascript:void(0);" class="wp-subcribe-author-url subscribed" title=" %4$d Subscribers | %5$d posts " data-author="%2$s" data-subscriber="%3$s">%1$s</a>',__('Unsubscribe ', 'wp-subscribe-author').esc_attr( get_the_author() ),get_the_author_meta( "ID" ) ,get_current_user_id(),get_num_subscribers(get_the_author_meta( "ID" )),number_format_i18n( get_the_author_posts() ));	
 	       }
 	       else{				
-	       printf('<a href="javascript:void(0);" class="wp-subcribe-author-url notsubscribed" title=" %4$d Subscribers | %5$d posts " data-author="%2$s" data-author="%2$s" data-subscriber="%3$s">%1$s</a>','Subscribe '.esc_attr( get_the_author() ),get_the_author_meta( "ID" ) ,get_current_user_id(),get_num_subscribers(get_the_author_meta( "ID" )),number_format_i18n( get_the_author_posts() ));	
+	       printf('<a href="javascript:void(0);" class="wp-subcribe-author-url notsubscribed" title=" %4$d Subscribers | %5$d posts " data-author="%2$s" data-author="%2$s" data-subscriber="%3$s">%1$s</a>',__('Subscribe ', 'wp-subscribe-author').esc_attr( get_the_author() ),get_the_author_meta( "ID" ) ,get_current_user_id(),get_num_subscribers(get_the_author_meta( "ID" )),number_format_i18n( get_the_author_posts() ));	
 	       }
 
 	 

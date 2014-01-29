@@ -4,13 +4,13 @@ Donate link: http://code-cocktail.in/donate-me/
 Tags: user, author, email, notification, notify, posts, subscribe, subscription
 Requires at least: 2.8
 Tested up to: 3.4.1
-Stable tag: 1.0
+Stable tag: 1.1
 License: GPLv2
 
-Wp Subcribe Author plugin is help subcriber to follow his/her favourity author.
+Wp Subscribe Author plugin is help subscriber to follow his/her favorite author.
 
 == Description ==
-Wp Subcribe Author plugin is help subcriber to follow his/her favourity author. Once subcriber starts follow the author, he will get notified all new post of author by email.
+Wp Subscribe Author plugin is help subscriber to follow his/her favorite author. Once subscriber starts follow the author, he will get notified allnew post of author by email.
 
 How it works ?
 
