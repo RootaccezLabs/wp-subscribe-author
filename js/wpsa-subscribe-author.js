@@ -1,52 +1,37 @@
-/*
- * @package: Wp Subscribe Author
- * @Version: 1.0
- * @License: GPL2
- * @package type: Developement
- * @Author: Gowri sankar Ramasamy
-*/
 
-jQuery(function(){
+jQuery(function($){
     
-    jQuery(".wp-subcribe-author-url").tipTip();
+ 
+	    var hoverHTMLDemoAjax = '<p>Recent tweets from <label id="twitter-username">the user</label></p><ul id="demo-cb-tweets"></ul>';
 
-    
-    jQuery(".wp-subcribe-author-url").click(function(){
-	var follow_link = jQuery(this);
-	var type;
-	
-	if(follow_link.hasClass('notsubscribed')){     
-	    type = "subscribe"; // Subcribe  	       
-	}
-	else if(follow_link.hasClass('subscribed')){    
-	    type = "unsubscribe"; // Unsubcribe    
-	}
-       
-       jQuery.post(wpsa_ajax_suport.ajaxurl,({action:'wpsa_subscribe_author',type:type,author_id:follow_link.attr('data-author'),subscriber_id:follow_link.attr('data-subscriber')}),function(response){
-				
-				jQuery(".wp-subcribe-author-url").each(function(){
-				
-                                if(response==0){				   
-				    if(jQuery(this).attr('data-author') == follow_link.attr('data-author')){
-				      jQuery(this).removeClass('subscribed').addClass('notsubscribed').text("Subscribe");
-				    }
-				}
-				else if(response==1) {
-				    if(jQuery(this).attr('data-author') == follow_link.attr('data-author')){   
-				      jQuery(this).removeClass('notsubscribed').addClass('subscribed').text("Unsubscribe");
-				    }
-				}
-								    
-				    
-				    });
-				
-				    
-					   // alert(response);
-					    
-	    });		 
-    
-     
-    });   
-    
+	    $("a[rel='author']").hovercard({
+	        detailsHTML: hoverHTMLDemoAjax,
+	        width: 350,
+	        onHoverIn: function () {
+	            // set your twitter id
+	            var user = 'gchokeen';
+
+	            $.ajax({
+	                url: 'http://twitter.com/statuses/user_timeline.json?screen_name=' + user + '&count=5&callback=?',
+	                type: 'GET',
+	                dataType: 'json',
+	                beforeSend: function () {
+	                    $("#demo-cb-tweets").prepend('<p class="loading-text">Loading latest  tweets...</p>');
+	                },
+	                success: function (data) {
+	                    $("#demo-cb-tweets").empty();
+	                    $('#twitter-username').text(user);
+	                    $.each(data, function (index, value) {
+	                        $("#demo-cb-tweets").append('<li>' + value.text + '</li>');
+	                    });
+	                },
+	                complete: function () {
+	                    $('.loading-text').remove();
+	                }
+	            });
+
+	        }
+	    });
+
 });
 
