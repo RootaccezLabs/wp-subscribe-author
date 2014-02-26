@@ -1,8 +1,9 @@
 
 jQuery(function($){
     
+    // todo: need to extract author id from : http://localhost/press2/?author=1
  
-	    var hoverHTMLDemoAjax = '<p>Recent tweets from <label id="twitter-username">the user</label></p><ul id="demo-cb-tweets"></ul>';
+	    var hoverHTMLDemoAjax = '<p>xxx</p>';
 
 	    $("a[rel='author']").hovercard({
 	        detailsHTML: hoverHTMLDemoAjax,
@@ -12,7 +13,7 @@ jQuery(function($){
 	            var user = 'gchokeen';
 
 	            $.ajax({
-	                url: 'http://twitter.com/statuses/user_timeline.json?screen_name=' + user + '&count=5&callback=?',
+	                url: 'https://twitter.com/statuses/user_timeline.json?screen_name=' + user + '&count=5&callback=?',
 	                type: 'GET',
 	                dataType: 'json',
 	                beforeSend: function () {

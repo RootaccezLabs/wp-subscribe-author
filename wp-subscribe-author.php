@@ -37,7 +37,8 @@ require_once (dirname(__FILE__) . '/classes/Model/wpsa_model.php');
 require_once (dirname(__FILE__) . '/classes/wpsa_template.php');
 //require_once (dirname(__FILE__) . '/classes/wpsa_shortcode.php');
 
-//require_once (dirname(__FILE__) . '/wpsa-ajax.php');
+require_once (dirname(__FILE__) . '/wpsa-ajax.php');
+
 
 define('WPSA_PLUGIN_NAME', plugin_basename(__FILE__));
 define('WPSA_PLUGIN_DIR', dirname(__FILE__) . DIRECTORY_SEPARATOR);
