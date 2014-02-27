@@ -1,35 +1,40 @@
 
 jQuery(function($){
-    
-    // todo: need to extract author id from : http://localhost/press2/?author=1
- 
-	    var hoverHTMLDemoAjax = '<p>xxx</p>';
 
+	/*
+	 * getAuthorID function used to extract the author id from author url
+	*/
+	
+	$.getAuthorID = function(url) {
+		var name = 'author';
+	    var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(url);
+	    if (!results) { 
+	        return 0; 
+	    }
+	    return results[1] || 0;
+	}
+	
+	/*
+	 * hovercard will bring author information using ajax
+	*/
+
+    var hoverHTMLDemoAjax = '<p class="wpsa-authorInfo"></p><button>Subscribe</button>';
+    var authorURL,authorID,$this;
+	    
 	    $("a[rel='author']").hovercard({
 	        detailsHTML: hoverHTMLDemoAjax,
 	        width: 350,
 	        onHoverIn: function () {
-	            // set your twitter id
-	            var user = 'gchokeen';
+	        	$this = $(this);
+	        	 authorURL = $this.find("a[rel='author']").attr('href');
+	        	 console.log(authorURL);
+	        	 authorID = $.getAuthorID(authorURL);
 
-	            $.ajax({
-	                url: 'https://twitter.com/statuses/user_timeline.json?screen_name=' + user + '&count=5&callback=?',
-	                type: 'GET',
-	                dataType: 'json',
-	                beforeSend: function () {
-	                    $("#demo-cb-tweets").prepend('<p class="loading-text">Loading latest  tweets...</p>');
-	                },
-	                success: function (data) {
-	                    $("#demo-cb-tweets").empty();
-	                    $('#twitter-username').text(user);
-	                    $.each(data, function (index, value) {
-	                        $("#demo-cb-tweets").append('<li>' + value.text + '</li>');
-	                    });
-	                },
-	                complete: function () {
-	                    $('.loading-text').remove();
-	                }
-	            });
+	     		$.post(wpsa_ajax_suport.ajaxurl,({action:'wpsa_getauthor_action','authorID':authorID}),function(response){
+	    	        
+	     			$this.find(".wpsa-authorInfo").html(response);
+	    	        
+	    		});		        	 
 
 	        }
 	    });
