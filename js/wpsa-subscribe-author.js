@@ -18,7 +18,7 @@ jQuery(function($){
 	 * hovercard will bring author information using ajax
 	*/
 
-    var hoverHTMLDemoAjax = '<p class="wpsa-authorInfo"></p><button>Subscribe</button>';
+    var hoverHTMLDemoAjax = '<p class="wpsa-authorInfo"></p>';
     var authorURL,authorID,$this;
 	    
 	    $("a[rel='author']").hovercard({
@@ -34,7 +34,7 @@ jQuery(function($){
 	     			$this.find(".wpsa-authorInfo").html(response);
 	    	        
 	    		});		        	 
-
+	     	
 	        }
 	    });
 
