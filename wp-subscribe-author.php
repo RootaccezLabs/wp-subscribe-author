@@ -42,7 +42,7 @@ require_once (dirname(__FILE__) . '/wpsa-ajax.php');
 
 define('WPSA_PLUGIN_NAME', plugin_basename(__FILE__));
 define('WPSA_PLUGIN_DIR', dirname(__FILE__) . DIRECTORY_SEPARATOR);
-
+define('WPSA_PLUGIN_VERSION','2.0');
 
 if (!class_exists('Wp_Subscribe_Author')) {
 
@@ -76,6 +76,10 @@ if (!class_exists('Wp_Subscribe_Author')) {
 			register_deactivation_hook(WPSA_PLUGIN_NAME, array(&$this, 'pluginDeactivate'));
 			register_uninstall_hook(WPSA_PLUGIN_NAME, array('wp-subscribe-author', 'pluginUninstall'));
 
+			add_action('new_to_publish', array($this, 'wpsa_notify_author_subscribers'));
+			add_action('draft_to_publish', array($this, 'wpsa_notify_author_subscribers'));
+			
+			
 			## Register plugin widgets
 			add_action('init', array($this, 'load_wpsa_transl'));
 			add_action('plugins_loaded', array(&$this, 'pluginLoad'));
@@ -194,7 +198,8 @@ if (!class_exists('Wp_Subscribe_Author')) {
 				dbDelta($tbl_wpsa_subscribe_author_query);
 	
 				}
-
+				
+				update_option("wpsa_subscribe_author_db_version", WPSA_PLUGIN_VERSION);
 
 			}
 
@@ -218,6 +223,12 @@ if (!class_exists('Wp_Subscribe_Author')) {
 
 			public function pluginLoad(){
 
+			}
+			
+			
+			public function  wpsa_notify_author_subscribers(){
+				
+				
 			}
 
 

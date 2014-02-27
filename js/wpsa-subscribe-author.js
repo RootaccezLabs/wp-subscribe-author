@@ -26,11 +26,10 @@ jQuery(function($){
 	        width: 350,
 	        onHoverIn: function () {
 	        	$this = $(this);
-	        	 authorURL = $this.find("a[rel='author']").attr('href');
-	        	 console.log(authorURL);
+	        	 authorURL = $this.find("a[rel='author']").attr('href');	        	
 	        	 authorID = $.getAuthorID(authorURL);
 
-	     		$.post(wpsa_ajax_suport.ajaxurl,({action:'wpsa_getauthor_action','authorID':authorID}),function(response){
+	     		$.get(wpsa_ajax_suport.ajaxurl,({action:'wpsa_getauthor_action','authorID':authorID}),function(response){
 	    	        
 	     			$this.find(".wpsa-authorInfo").html(response);
 	    	        
