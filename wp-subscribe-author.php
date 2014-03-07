@@ -226,7 +226,40 @@ if (!class_exists('Wp_Subscribe_Author')) {
 			}
 			
 			
-			public function  wpsa_notify_author_subscribers(){
+			public function  wpsa_notify_author_subscribers($post){
+				
+				$wpsamodel =new Wpsa_Model();
+				$template =new Wpsa_Template();
+				
+				$author_id = $post->post_author;
+				$Author_name = get_the_author_meta('display_name',$author_id);
+				
+				if($wpsamodel->get_num_subscribers($author_id) != 0){
+					
+					$subscribers = $wpsamodel->getAllSubscribers($author_id);
+					
+
+					foreach($subscribers as $subscriber){
+						$subscriber_id = $subscriber->subscriber_id;
+						$user = get_user_by('id',$subscriber_id);
+						$subscriber_email = $user->user_email;
+					
+						$postMessage = "";
+						$headers = "";
+						$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+						$headers .= "From: Wp Subscribe Author <noreply@example.com>" . "\r\n";
+					
+						$param = array('post_id'=>$post->ID,'author_id'=>$author_id);
+						
+						$postMessage = $template->renderTemplate('default',$param);
+					
+						if (wp_mail($subscriber_email, "New Post From $Author_name", $postMessage, $headers)) {
+					
+						}
+						
+					
+				}
+				
 				
 				
 			}

@@ -60,6 +60,18 @@ class Wpsa_Model{
     	$wpdb->query($wpdb->prepare("DELETE FROM $this->tbl_wpsa_subscribe_author WHERE author_id = %d AND subscriber_id = %d",$author_id,$subscriber_id));
  
     }
+    
+    /*
+     *  getAllSubscribers will get he list of subscribers
+     *  @param: int $author_id
+     *  @param: int $subscriber_id
+     */    
+    public function getAllSubscribers($author_id){
+    	global $wpdb;
+    	
+    	return $subscribers = $wpdb->get_results($wpdb->prepare( "SELECT subscriber_id FROM $this->tbl_wpsa_subscribe_author WHERE author_id = %d AND status = %s",$author_id,'active'));
+    	
+    }
         
 	
 
