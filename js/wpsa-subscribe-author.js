@@ -37,6 +37,27 @@ jQuery(function($){
 	     	
 	        }
 	    });
+	    
+	    	    
+	    $(document).on('click','.wpsa-subscribe-btn',function(){	
+	    	 var userID,authorID,$this;
+	    	 $this = $(this);
+	    	 userID = $this.attr("data-userID");
+	    	 authorID = $this.attr("data-authorID");
+	    	 
+	     	$.post(wpsa_ajax_suport.ajaxurl,({action:'wpsa_subscribe_author','author_id':authorID,'subscriber_id':userID}),function(response){
+	    	        if(response==0){
+	    	        	$this.text("Subscribe");
+	    	        }
+	    	        else{
+	    	        	$this.text("Unsubscribe");
+	    	        }
+	     	    	
+	    	        
+	    	});		
+	    	
+	    });
+	    
 
 });
 

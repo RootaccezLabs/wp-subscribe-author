@@ -42,12 +42,30 @@ function wpsa_getauthor_action_handle(){
 		</ul>
 		<?php 
 		if($user_id ==0){
+		/*
+		 * @todo: 2.1 version feature, It will allow un logged in user to subscribe 
+		 */
 		?>
-		<input type="email" name="wpsa-subcriber-mail" id"wpsa-subcriber-mail" value="" placeholder="<?php echo __('Enter your email to subscribe with author','wp-subscribe-author') ?>"> <button class="wpsa-subscribe-btn"><?php echo __('Subscribe','wp-subscribe-author') ?></button>
+		<!--  
+			<input type="email" name="wpsa-subcriber-mail" id"wpsa-subcriber-mail" value="" placeholder="<?php echo __('Enter your email to subscribe with author','wp-subscribe-author') ?>"> <button class="wpsa-subscribe-btn"><?php echo __('Subscribe','wp-subscribe-author') ?></button>
+			 -->
 		<?php 
 		}	
-		else if($user_id != $authorID){ ?>
-			<button class="wpsa-subscribe-btn"><?php echo __('Subscribe','wp-subscribe-author') ?></button>
+		else if($user_id != $authorID){ 
+			if($wpsamodel->is_user_subscribed($authorID, $user_id)){
+				//unsubscribe
+				$btn_txt = __('Unsubscribe','wp-subscribe-author');
+		
+			}
+			else{
+				//subscribe
+				$btn_txt = __('Subscribe','wp-subscribe-author');
+
+			}
+			?>
+
+			<button class="wpsa-subscribe-btn" data-authorID="<?php echo $authorID; ?>" data-userID="<?php echo $user_id; ?>" ><?php echo  $btn_txt; ?></button>
+			
 		<?php } ?>
 	<?php 
 	
@@ -56,7 +74,7 @@ function wpsa_getauthor_action_handle(){
 
 
 /*
- * Action to subscribe or unsubscribe
+ * Action to subscribe/unsubscribe
  * Action Method: Post
  */
 function wpsa_subscribe_author_handle(){
