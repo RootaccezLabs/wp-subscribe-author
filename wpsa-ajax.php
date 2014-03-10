@@ -15,6 +15,12 @@ add_action( 'init', 'wpsa_ajax_suport' );
 
 $wpsamodel =new Wpsa_Model();
 
+function change_avatar_css($class) {
+	$class = preg_replace(":class='(.*.*)':", 'class="\1 hc-pic"', $class);
+	//$class = str_replace("class='hc-pic avatar", 'class="avatar avatar-96 photo"', $class) ;
+	return $class;
+}
+
 /*
  * Action to pull the author information
  * Action Method: GET
@@ -28,11 +34,18 @@ function wpsa_getauthor_action_handle(){
 	$UserDetails = get_user_meta($authorID);
 	
 	$user_id = get_current_user_id();
-
+	
+	$num_subscribers =  $wpsamodel->get_num_subscribers($authorID);
+	
 
 	$allowed = array('first_name','last_name','nickname','description');
 	?>
-		<ul>
+			<?php 
+		add_filter('get_avatar','change_avatar_css');		
+		echo get_avatar($authorID);
+		remove_filter('get_avatar','change_avatar_css');
+		?>
+		<ul style="list-style:none;">
 			<?php foreach ($UserDetails as $meta=>$value): ?>
 		
 			<?php  if(in_array($meta, $allowed)): ?>
@@ -40,6 +53,7 @@ function wpsa_getauthor_action_handle(){
 				<?php endif; ?>
 			<?php endforeach;?>
 		</ul>
+
 		<?php 
 		if($user_id ==0){
 		/*
@@ -66,7 +80,11 @@ function wpsa_getauthor_action_handle(){
 
 			<button class="wpsa-subscribe-btn" data-authorID="<?php echo $authorID; ?>" data-userID="<?php echo $user_id; ?>" ><?php echo  $btn_txt; ?></button>
 			
+			
+			
 		<?php } ?>
+		<span><?php echo sprintf(_n('%1$s Subscriber','%1$s Subscribers',$num_subscribers,"wp-subscribe-author"),$num_subscribers); ?></span>
+		
 	<?php 
 	
     die();
