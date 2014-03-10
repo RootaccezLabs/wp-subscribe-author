@@ -4,7 +4,7 @@ Donate link: http://code-cocktail.in/donate-me/
 Tags: user, author, email, notification, notify, posts, subscribe, subscription
 Requires at least: 2.8
 Tested up to: 3.4.1
-Stable tag: 1.1
+Stable tag: 1.5
 License: GPLv2
 
 Wp Subscribe Author plugin is help subscriber to follow his/her favorite author.
@@ -31,9 +31,8 @@ e.g.
 == Frequently Asked Questions ==
 
 = How to get subscribe link in template ? =
-Add the below code in your template files
 
-if(function_exists('get_subcribe_link')){ get_subcribe_link();	}
+Plugin will automatically find the author link and display the pop card. Author link should contain the rel="author" attribute.
 
 = Can Guest user subcribe author post ? =
  No, Current version of the plugin  will not support for guest users.
@@ -46,6 +45,9 @@ if(function_exists('get_subcribe_link')){ get_subcribe_link();	}
 * Initial release.
 = 1.1 =
 * english translation support added
+= 1.5 =
+* Object Oriented Programming style
+* tipTips jquery plugin replaced by hovercard query plug-in 
 
 == Upgrade Notice ==
 
