@@ -30,14 +30,24 @@ jQuery(function($){
 			 
 	        	 authorID = $.getAuthorID(authorURL);
 			 
-			 if (authorID == 0) {
+			 if (authorID == 0 || typeof(authorID) =="undefined" ) {
+				
 				authorID = $this.attr('data-authorID');
 			 }
+		
 			 
-			 if (authorID == 0) {
-			   authorID = href.substr(href.lastIndexOf('/') + 1); // nice name from url
+			 if (authorID == 0 || typeof(authorID) =="undefined") {
+				// remove trailing slash from author url
+				 if(authorURL.substr(-1) == '/') {					 
+					authorURL = authorURL.substr(0, authorURL.length - 1);
+					
+				 }
+				
+				  
+				authorID = authorURL.split('/').pop(); // nice name from url
+			
 			 }
-			 
+			 		
 			 
 			
 
