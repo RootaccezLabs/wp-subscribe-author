@@ -12,6 +12,7 @@ class Wpsa_Model{
 		$this->prefix = $wpdb->prefix;
 		
 		$this->tbl_wpsa_subscribe_author = $this->prefix.'wpsa_subscribe_author';
+		$this->tbl_users = $this->prefix.'users';
 	}
 	
 	/*
@@ -72,7 +73,17 @@ class Wpsa_Model{
     	return $subscribers = $wpdb->get_results($wpdb->prepare( "SELECT subscriber_id FROM $this->tbl_wpsa_subscribe_author WHERE author_id = %d AND status = %s",$author_id,'active'));
     	
     }
-        
+     
+     /*
+      * @method getAuthorIDbyNicename will extract the author id from user nicename
+      * @param string $nicename
+      */
+     public function getAuthorIDbyNicename($nicename){
+		global $wpdb;
+	
+		return $authorID = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $this->tbl_users WHERE user_nicename = %s ",$nicename));
+
+	}   
 	
 
 }

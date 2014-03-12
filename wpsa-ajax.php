@@ -31,6 +31,10 @@ function wpsa_getauthor_action_handle(){
 	
 	$authorID =  $_GET['authorID'];
 	
+	if(!is_numeric($authorID)){
+		$authorID = $wpsamodel->getAuthorIDbyNicename($authorID);
+	}
+	
 	$UserDetails = get_user_meta($authorID);
 	
 	$user_id = get_current_user_id();
