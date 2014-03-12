@@ -28,6 +28,9 @@ jQuery(function($){
 	        	$this = $(this);
 	        	 authorURL = $this.find("a[rel='author']").attr('href');	        	
 	        	 authorID = $.getAuthorID(authorURL);
+			 if (authorID == 0) {
+				authorID = $this.attr('data-authorID');
+			 }
 
 	     		$.get(wpsa_ajax_suport.ajaxurl,({action:'wpsa_getauthor_action','authorID':authorID}),function(response){
 	    	        

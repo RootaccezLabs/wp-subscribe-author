@@ -26,7 +26,8 @@ e.g.
 
 
 == Screenshots ==
-1.screenshot-1.png
+
+1. screenshot-1.png
 
 == Frequently Asked Questions ==
 

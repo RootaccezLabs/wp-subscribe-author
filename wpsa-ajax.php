@@ -35,6 +35,7 @@ function wpsa_getauthor_action_handle(){
 	
 	$user_id = get_current_user_id();
 	
+	
 	$num_subscribers =  $wpsamodel->get_num_subscribers($authorID);
 	
 
@@ -54,7 +55,10 @@ function wpsa_getauthor_action_handle(){
 			<?php endforeach;?>
 		</ul>
 
-		<?php 
+		<?php
+		if($authorID != 0){
+			
+		
 		if($user_id ==0){
 		/*
 		 * @todo: 2.1 version feature, It will allow un logged in user to subscribe 
@@ -84,6 +88,7 @@ function wpsa_getauthor_action_handle(){
 			
 		<?php } ?>
 		<span><?php echo sprintf(_n('%1$s Subscriber','%1$s Subscribers',$num_subscribers,"wp-subscribe-author"),$num_subscribers); ?></span>
+		<?php } ?>
 		
 	<?php 
 	
