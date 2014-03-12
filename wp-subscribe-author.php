@@ -78,6 +78,7 @@ if (!class_exists('Wp_Subscribe_Author')) {
 
 			add_action('new_to_publish', array($this, 'wpsa_notify_author_subscribers'));
 			add_action('draft_to_publish', array($this, 'wpsa_notify_author_subscribers'));
+	
 			
 			
 			## Register plugin widgets
@@ -238,28 +239,49 @@ if (!class_exists('Wp_Subscribe_Author')) {
 					
 					$subscribers = $wpsamodel->getAllSubscribers($author_id);
 					
-
+				
 					foreach($subscribers as $subscriber){
+						
 						$subscriber_id = $subscriber->subscriber_id;
 						$user = get_user_by('id',$subscriber_id);
 						$subscriber_email = $user->user_email;
 					
 						$postMessage = "";
-						$headers = "";
-						$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-						$headers .= "From: Wp Subscribe Author <noreply@example.com>" . "\r\n";
-					
+						
 						$param = array('post_id'=>$post->ID,'author_id'=>$author_id);
 						
 						$postMessage = $template->renderTemplate('default',$param);
 					
-						if (wp_mail($subscriber_email, "New Post From $Author_name", $postMessage, $headers)) {
 					
-						}
+					
+						$parse = parse_url(get_option('siteurl'));
+						$blog_host = $parse['host'];
+					
+						$headers = '';
+						
+						$headers  = "MIME-Version: 1.0" . "\r\n";
+						$headers .= "Content-type: text/html; charset=".get_bloginfo('charset')."" . "\r\n";
+						$headers .= "From: ".get_bloginfo('name')." <no-reply@".$blog_host.">" . "\r\n";
+						
+						$subject ="New Post From $Author_name";
 						
 					
-				}
-				
+			
+						if(wp_mail($subscriber_email,$subject , $postMessage, $headers)){
+							
+							//echo "sending success";
+						}
+						else{
+							
+							//echo "sending failed";
+						}
+					
+					
+
+						
+					}
+					
+			
 				
 				
 			}

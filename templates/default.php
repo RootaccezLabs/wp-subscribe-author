@@ -10,7 +10,7 @@ $author_name = get_userdata($author_id)->display_name;
 $blogname = get_bloginfo('name');
 $author_url = esc_url( get_author_posts_url($post_id));
 
-$emailtemplate = <<<EOD
+echo $emailtemplate = <<<EOD
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
