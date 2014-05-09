@@ -61,16 +61,18 @@ function wpsa_getauthor_action_handle(){
 
 		<?php
 		if($authorID != 0){
-			
+		?>
+			<span><?php echo sprintf(_n('%1$s Subscriber','%1$s Subscribers',$num_subscribers,"wp-subscribe-author"),$num_subscribers); ?></span>
+		<div class="wpsa-footer">
+		<?php 
 		
 		if($user_id ==0){
-		/*
-		 * @todo: 2.1 version feature, It will allow un logged in user to subscribe 
-		 */
+	
 		?>
-		<!--  
-			<input type="email" name="wpsa-subcriber-mail" id"wpsa-subcriber-mail" value="" placeholder="<?php echo __('Enter your email to subscribe with author','wp-subscribe-author') ?>"> <button class="wpsa-subscribe-btn"><?php echo __('Subscribe','wp-subscribe-author') ?></button>
-			 -->
+		
+		<input type="email" name="wpsa-subcriber-mail" id"wpsa-subcriber-mail" value="" placeholder="<?php echo __('Enter your email to subscribe with author','wp-subscribe-author') ?>"> 
+		<button class="wpsa-subscribe-btn" data-authorID="<?php echo $authorID; ?>" data-userID="0"><?php echo __('Subscribe','wp-subscribe-author') ?></button>
+	
 		<?php 
 		}	
 		else if($user_id != $authorID){ 
@@ -91,7 +93,8 @@ function wpsa_getauthor_action_handle(){
 			
 			
 		<?php } ?>
-		<span><?php echo sprintf(_n('%1$s Subscriber','%1$s Subscribers',$num_subscribers,"wp-subscribe-author"),$num_subscribers); ?></span>
+		</div>
+		
 		<?php } ?>
 		
 	<?php 
@@ -109,17 +112,40 @@ function wpsa_subscribe_author_handle(){
 	
 	$author_id = $_POST['author_id'];
 	$subscriber_id = $_POST['subscriber_id'];
-	 
-	if($wpsamodel->is_user_subscribed($author_id, $subscriber_id)){
-		//unsubscribe
-		$wpsamodel->unsubscribeAuthor($author_id, $subscriber_id);
-		echo "0";
+	$subscriber_email = $_POST['subscriber_email'];
+	
+	
+	if($subscriber_email == 0){
+		// logged in user subscribetion 
+		
+		if($wpsamodel->is_user_subscribed($author_id, $subscriber_id)){
+			//unsubscribe
+			$wpsamodel->unsubscribeAuthor($author_id, $subscriber_id);
+			echo "0";
+		}
+		else{
+			//subscribe
+			$wpsamodel->subscribeAuthor($author_id, $subscriber_id);
+			echo "1";
+		}
+				
 	}
 	else{
-		//subscribe		
-		$wpsamodel->subscribeAuthor($author_id, $subscriber_id);
-		echo "1";
+		
+		if($wpsamodel->is_user_subscribed_by_email($author_id, $subscriber_email)){
+			
+			// subscribe process
+		}
+		else{
+			// warning process that user already subscribed
+		}
+		
+		
+		// unlogged in user subscribetion
+		
 	}
+	 
+
 	 
 	die();
 }
