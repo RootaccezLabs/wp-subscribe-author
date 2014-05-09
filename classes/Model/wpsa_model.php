@@ -29,6 +29,17 @@ class Wpsa_Model{
     }
     
     /*
+     * @param: int $author_id 
+     * @param: string $subscriber_email
+     */
+    public function is_user_subscribed_by_email($author_id,$subscriber_email){
+    	global $wpdb;
+    
+    	$subscribe_count = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM $this->tbl_wpsa_subscribe_author WHERE author_id = %d AND subscriber_email = %s",$author_id,$subscriber_email) );
+    	return  ($subscribe_count==0?false:true);
+    }
+        
+    /*
      * It gives the number of author subscribers 
      * @param: int $author_id 
      */
@@ -50,6 +61,18 @@ class Wpsa_Model{
    
     }
 
+    /*
+     *  subscribeAuthor is used to subscribe a author
+     *  @param: int $author_id
+     *  @param: string $subscriber_email
+     */
+    public function subscribeAuthorbyEmail($author_id,$subscriber_email){
+    	global $wpdb;
+    	 
+    	$wpdb->insert($this->tbl_wpsa_subscribe_author,array('author_id' =>$author_id,'subscriber_email' =>$subscriber_email,'created_at'=>current_time('mysql', 1)),array('%d','%s','%s'));
+    	 
+    }
+        
     /*
      *  unsubscribeAuthor is used to unsubscribe a author
      *  @param: int $author_id

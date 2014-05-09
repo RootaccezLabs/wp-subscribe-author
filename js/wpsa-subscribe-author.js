@@ -62,7 +62,7 @@ jQuery(function($){
 	    
 	    	    
 	    $(document).on('click','.wpsa-subscribe-btn',function(){	
-	    	 var userID,authorID,$this,userEmail='';
+	    	 var userID,authorID,$this,subscriber_email='0';
 	    	 $this = $(this);
 	    	 userID = $this.attr("data-userID");
 	    	
@@ -70,22 +70,30 @@ jQuery(function($){
 	    	  * @todo: email validation
 	    	  */
 	    	 
-	    	 if(userID==0){ // unlogged in user
-	    		 userEmail = $("#wpsa-subcriber-mail").val();
+	    	 if(subscriber_email==0){ // unlogged in user
+	    		 subscriber_email = $("#wpsa-subcriber-mail").val();
 	    	 }
 	    	
+	    	
+	  
 	    	 authorID = $this.attr("data-authorID");
 	    	 
-	     	$.post(wpsa_ajax_suport.ajaxurl,({action:'wpsa_subscribe_author','author_id':authorID,'subscriber_id':userID,'subscriber_email':userEmail}),function(response){
-	    	        if(response==0){
-	    	        	$this.text("Subscribe");
-	    	        }
-	    	        else{
-	    	        	$this.text("Unsubscribe");
-	    	        }
+	     	$.post(wpsa_ajax_suport.ajaxurl,({action:'wpsa_subscribe_author','author_id':authorID,'subscriber_id':userID,'subscriber_email':subscriber_email}),function(response){
+	     		response = $.parseJSON(response);
+	     		
+	     		if(response.status == 2){
+	     			$this.after(response.message).fadeOut('slow');
+	     		}	     		
+     			if(response.status==0){
+    	        	$this.text("Subscribe");
+    	        }
+    	        else{
+    	        	$this.text("Unsubscribe");
+    	        }
 	     	    	
 	    	        
 	    	});		
+	    	
 	    	
 	    });
 	    
