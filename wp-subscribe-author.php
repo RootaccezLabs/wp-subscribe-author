@@ -3,7 +3,7 @@
 Plugin Name: Wp Subscribe Author
 Plugin URI: http://wordpress.org/extend/plugins/wp-subscribe-author/
 Description: Wp Subscribe Author plugin is help subscriber to follow his/her favourite author. Once subscriber starts follow the author, he will get notified all new post of author by email.
-Version: 1.5.1
+Version: 1.6
 Author: Gowri Sankar Ramasamy
 Author URI: http://code-cocktail.in/author/gowrisankar/
 Donate link: http://code-cocktail.in/donate-me/
