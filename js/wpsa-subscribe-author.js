@@ -2,6 +2,20 @@
 jQuery(function($){
 
 	/*
+	 * E-mail validation function
+	 */
+	var emailValidate = function(field) {
+	    var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	    if (!filter.test(field.value)) {
+	    field.focus;
+	    $(".wpsa-message").html("Please enter valid email!").delay('2000').fadeOut('slow');
+	    return false;
+	    }
+	 };
+	    
+	    
+	
+	/*
 	 * getAuthorID function used to extract the author id from author url
 	*/
 	
@@ -65,24 +79,32 @@ jQuery(function($){
 	    	 var userID,authorID,$this,subscriber_email='0';
 	    	 $this = $(this);
 	    	 userID = $this.attr("data-userID");
+	    	 var message = $(".wpsa-message");
+	    	 var emailField = $("#wpsa-subcriber-mail");
 	    	
 	    	 /*
 	    	  * @todo: email validation
 	    	  */
 	    	 
 	    	 if(subscriber_email==0){ // unlogged in user
-	    		 subscriber_email = $("#wpsa-subcriber-mail").val();
+	    		 
+	    		 if(emailValidate(emailField) !== false){
+	    			 subscriber_email = emailField.val();	 
+	    		 }
+	    		 else{
+	    			 return false;
+	    		 }
+ 
 	    	 }
-	    	
-	    	
+
 	  
 	    	 authorID = $this.attr("data-authorID");
 	    	 
 	     	$.post(wpsa_ajax_suport.ajaxurl,({action:'wpsa_subscribe_author','author_id':authorID,'subscriber_id':userID,'subscriber_email':subscriber_email}),function(response){
 	     		response = $.parseJSON(response);
 	     		
-	     		if(response.status == 2){
-	     			$this.after(response.message).fadeOut('slow');
+	     		if(response.status == 2){	     			
+	     			message.html(response.message).delay('2000').fadeOut('slow');
 	     		}	     		
      			if(response.status==0){
     	        	$this.text("Subscribe");

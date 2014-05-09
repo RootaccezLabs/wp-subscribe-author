@@ -93,6 +93,7 @@ function wpsa_getauthor_action_handle(){
 			
 			
 		<?php } ?>
+			<div class="wpsa-message"></div>
 		</div>
 		
 		<?php } ?>
@@ -134,7 +135,7 @@ function wpsa_subscribe_author_handle(){
 		
 		if($wpsamodel->is_user_subscribed_by_email($author_id, $subscriber_email)){
 			
-			echo json_encode(array('status'=>2,'message'=>'You are already subscribed this author!'));
+			echo json_encode(array('status'=>2,'message'=>'You already subscribed this author!'));
 
 		}
 		else{
