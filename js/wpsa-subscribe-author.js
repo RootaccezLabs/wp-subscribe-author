@@ -79,14 +79,14 @@ jQuery(function($){
 	    
 	    	    
 	    $(document).on('click','.wpsa-subscribe-btn',function(){	
-	    	 var userID,authorID,$this,subscriber_email='0';
+	    	 var userID,authorID,$this,subscriber_email=0;
 	    	 $this = $(this);
 	    	 userID = $this.attr("data-userID");
 	    	 var message = $(".wpsa-message");
 	    	 var emailField = $("#wpsa-subcriber-mail");
 	    	
 	    	 
-	    	 if(subscriber_email==0){ // unlogged in user
+	    	 if(userID==0){ // unlogged in user
 
 	    		 if(emailValidate(emailField) !== false){
 	    			 subscriber_email = emailField.val();	 
