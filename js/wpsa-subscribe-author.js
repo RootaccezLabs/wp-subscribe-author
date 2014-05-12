@@ -5,11 +5,14 @@ jQuery(function($){
 	 * E-mail validation function
 	 */
 	var emailValidate = function(field) {
-	    var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-	    if (!filter.test(field.value)) {
+	    var filter = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	    if (!filter.test(field.val())) {
 	    	field.focus;
-	    	$(".wpsa-message").html("Please enter valid email!").delay('2000').fadeOut('slow');
+	    	$(".wpsa-message").show().html("Please enter valid email!").delay('2000').fadeOut('slow');
 	    	return false;
+	    }
+	    else{
+	    	return true;
 	    }
 	 };
 	    
@@ -82,12 +85,9 @@ jQuery(function($){
 	    	 var message = $(".wpsa-message");
 	    	 var emailField = $("#wpsa-subcriber-mail");
 	    	
-	    	 /*
-	    	  * @todo: email validation
-	    	  */
 	    	 
 	    	 if(subscriber_email==0){ // unlogged in user
-	    		 
+
 	    		 if(emailValidate(emailField) !== false){
 	    			 subscriber_email = emailField.val();	 
 	    		 }
