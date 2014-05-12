@@ -7,9 +7,9 @@ jQuery(function($){
 	var emailValidate = function(field) {
 	    var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 	    if (!filter.test(field.value)) {
-	    field.focus;
-	    $(".wpsa-message").html("Please enter valid email!").delay('2000').fadeOut('slow');
-	    return false;
+	    	field.focus;
+	    	$(".wpsa-message").html("Please enter valid email!").delay('2000').fadeOut('slow');
+	    	return false;
 	    }
 	 };
 	    

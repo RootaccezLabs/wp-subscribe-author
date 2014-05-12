@@ -77,14 +77,27 @@ class Wpsa_Model{
      *  unsubscribeAuthor is used to unsubscribe a author
      *  @param: int $author_id
      *  @param: int $subscriber_id
-    */
+     */
     public function unsubscribeAuthor($author_id,$subscriber_id){
     	global $wpdb;
     	
     	$wpdb->query($wpdb->prepare("DELETE FROM $this->tbl_wpsa_subscribe_author WHERE author_id = %d AND subscriber_id = %d",$author_id,$subscriber_id));
  
     }
+
+    /*
+     * unsubscribeMail is used to unsubscribe a author from by email
+     *  @param: int $author_id
+     *  @param: string $email_md5 
+     * 
+     */
+    public function unsubscribeMail($author_id,$email_md5){
+    	global $wpdb;
     
+    	$wpdb->query($wpdb->prepare("DELETE FROM $this->tbl_wpsa_subscribe_author WHERE author_id = %d AND md5(subscriber_email) = %s",$author_id,$email_md5));
+    	
+    }
+        
     /*
      *  getAllSubscribers will get he list of subscribers
      *  @param: int $author_id
@@ -106,7 +119,9 @@ class Wpsa_Model{
 	
 		return $authorID = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $this->tbl_users WHERE user_nicename = %s ",$nicename));
 
-	}   
+	}  
+
+
 	
 
 }

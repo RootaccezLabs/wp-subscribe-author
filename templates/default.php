@@ -1,6 +1,7 @@
 <?php 
 $post_id = $data['data']['post_id'];
 $author_id = $data['data']['author_id'];
+$subscriber_email = $data['data']['subscriber_email'];
 
 $post = get_post( $post_id );
 $post_title = $post->post_title;
@@ -9,6 +10,8 @@ $post_content = wp_trim_words( $post->post_content );
 $author_name = get_userdata($author_id)->display_name;
 $blogname = get_bloginfo('name');
 $author_url = esc_url( get_author_posts_url($post_id));
+
+$unsubscribe_link = site_url().'?wpsa_unsubscribe='.md5($subscriber_email).'&author='.$author_id;
 
 echo $emailtemplate = <<<EOD
 
@@ -412,7 +415,7 @@ $post_content
 <tr>
 <td colspan="2" valign="middle" id="utility">
 <div mc:edit="std_utility">
-&nbsp;<a href="$author_url">unsubscribe from this list</a>
+&nbsp;<a href="$unsubscribe_link">unsubscribe from this list</a>
 </div>
 </td>
 </tr>

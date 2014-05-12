@@ -38,6 +38,7 @@ require_once (dirname(__FILE__) . '/classes/wpsa_template.php');
 //require_once (dirname(__FILE__) . '/classes/wpsa_shortcode.php');
 
 require_once (dirname(__FILE__) . '/wpsa-ajax.php');
+require_once (dirname(__FILE__) . '/wpsa-unsubscribe.php');
 
 
 define('WPSA_PLUGIN_NAME', plugin_basename(__FILE__));
@@ -248,7 +249,7 @@ if (!class_exists('Wp_Subscribe_Author')) {
 					
 						$postMessage = "";
 						
-						$param = array('post_id'=>$post->ID,'author_id'=>$author_id);
+						$param = array('post_id'=>$post->ID,'author_id'=>$author_id,'subscriber_email'=>$subscriber_email);
 						
 						$postMessage = $template->renderTemplate('default',$param);
 					
