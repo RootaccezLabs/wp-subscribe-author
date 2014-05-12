@@ -106,7 +106,7 @@ class Wpsa_Model{
     public function getAllSubscribers($author_id){
     	global $wpdb;
     	
-    	return $subscribers = $wpdb->get_results($wpdb->prepare( "SELECT subscriber_id FROM $this->tbl_wpsa_subscribe_author WHERE author_id = %d AND status = %s",$author_id,'active'));
+    	return $subscribers = $wpdb->get_results($wpdb->prepare( "SELECT subscriber_id,subscriber_email FROM $this->tbl_wpsa_subscribe_author WHERE author_id = %d AND status = %s",$author_id,'active'));
     	
     }
      

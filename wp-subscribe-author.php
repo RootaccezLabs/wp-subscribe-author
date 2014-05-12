@@ -244,8 +244,14 @@ if (!class_exists('Wp_Subscribe_Author')) {
 					foreach($subscribers as $subscriber){
 						
 						$subscriber_id = $subscriber->subscriber_id;
-						$user = get_user_by('id',$subscriber_id);
-						$subscriber_email = $user->user_email;
+						
+						if($subscriber_id != 0 ){
+							$user = get_user_by('id',$subscriber_id);
+							$subscriber_email = $user->user_email;
+						}
+						else{
+							$subscriber_email = $subscriber->subscriber_email;
+						}
 					
 						$postMessage = "";
 						
