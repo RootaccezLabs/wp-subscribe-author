@@ -116,20 +116,20 @@ function wpsa_subscribe_author_handle(){
 	$subscriber_email = $_POST['subscriber_email'];
 	
 	
-	if($subscriber_email != 0){
-		// logged in user subscribetion 
+	if(is_user_logged_in()){
+		// logged in user subscription 
 		
 		if($wpsamodel->is_user_subscribed($author_id, $subscriber_id)){
 			//unsubscribe
 			$wpsamodel->unsubscribeAuthor($author_id, $subscriber_id);
-			echo json_encode(array('status'=>0));
+			echo json_encode(array('status'=>0,'message'=>'Your unsubscribed sucessfully'));
 		}
 		else{
 			//subscribe
 			$wpsamodel->subscribeAuthor($author_id, $subscriber_id);
-			echo json_encode(array('status'=>1));
+			echo json_encode(array('status'=>1,'message'=>'Your subscribed sucessfully'));
 		}
-				
+
 	}
 	else{
 		
@@ -145,7 +145,7 @@ function wpsa_subscribe_author_handle(){
 		}
 		
 		
-		// unlogged in user subscribetion
+		// unlogged in user subscription
 		
 	}
 	 

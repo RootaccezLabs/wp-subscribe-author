@@ -108,9 +108,11 @@ jQuery(function($){
 	     		}	     		
      			if(response.status==0){
     	        	$this.text("Subscribe");
+    	        	message.html(response.message).delay('2000').fadeOut('slow');
     	        }
     	        else{
     	        	$this.text("Unsubscribe");
+    	        	message.html(response.message).delay('2000').fadeOut('slow');
     	        }
 	     	    	
 	    	        
