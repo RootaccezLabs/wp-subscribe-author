@@ -122,12 +122,12 @@ function wpsa_subscribe_author_handle(){
 		if($wpsamodel->is_user_subscribed($author_id, $subscriber_id)){
 			//unsubscribe
 			$wpsamodel->unsubscribeAuthor($author_id, $subscriber_id);
-			echo json_encode(array('status'=>0,'message'=>'Your unsubscribed sucessfully'));
+			echo json_encode(array('status'=>0,'message'=>'Your unsubscribed successfully'));
 		}
 		else{
 			//subscribe
 			$wpsamodel->subscribeAuthor($author_id, $subscriber_id);
-			echo json_encode(array('status'=>1,'message'=>'Your subscribed sucessfully'));
+			echo json_encode(array('status'=>1,'message'=>'Your subscribed successfully'));
 		}
 
 	}
@@ -141,7 +141,7 @@ function wpsa_subscribe_author_handle(){
 		else{
 			// subscribe process
 			$wpsamodel->subscribeAuthorbyEmail($author_id, $subscriber_email);
-			echo json_encode(array('status'=>1,'message'=>'Your subscribed sucessfully'));
+			echo json_encode(array('status'=>1,'message'=>'Your subscribed successfully'));
 		}
 		
 		

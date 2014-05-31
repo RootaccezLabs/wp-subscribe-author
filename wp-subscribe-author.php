@@ -239,7 +239,7 @@ if (!class_exists('Wp_Subscribe_Author')) {
 				if($wpsamodel->get_num_subscribers($author_id) != 0){
 					
 					$subscribers = $wpsamodel->getAllSubscribers($author_id);
-					
+									
 				
 					foreach($subscribers as $subscriber){
 						
@@ -272,7 +272,7 @@ if (!class_exists('Wp_Subscribe_Author')) {
 						
 						$subject ="New Post From $Author_name";
 						
-					
+
 			
 						if(wp_mail($subscriber_email,$subject , $postMessage, $headers)){
 							
@@ -286,8 +286,10 @@ if (!class_exists('Wp_Subscribe_Author')) {
 					
 
 						
-					}
+					} //end loop
 					
+					
+				
 			
 				
 				
