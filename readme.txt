@@ -36,7 +36,7 @@ e.g.
 Plugin will automatically find the author link and display the pop card. Author link should contain the rel="author" attribute. If it's not working please add the 'data-authorID="<?php echo get_the_author_meta('ID'); ?>"' to author link.
 
 = Can Guest user subcribe author post ? =
- No, Current version of the plugin  will not support for guest users.
+ yep, plugin supports guest user subscription option from verion 1.6 .
  
  
 
@@ -45,12 +45,14 @@ Plugin will automatically find the author link and display the pop card. Author 
 = 1.0 =
 * Initial release.
 = 1.1 =
-* english translation support added
+* english translation support added.
 = 1.5 =
-* Object Oriented Programming style
-* tipTips jquery plugin replaced by hovercard query plug-in 
+* Object Oriented Programming style.
+* tipTips jquery plugin replaced by hovercard query plug-in. 
 = 1.5.1 =
-* Nice authour url also automitcally work now
+* Nice authour url also automitcally work now.
+= 1.6 =
+* Guest user subscription option added.
 
 == Upgrade Notice ==
 
