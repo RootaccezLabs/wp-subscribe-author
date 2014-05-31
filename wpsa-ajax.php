@@ -141,7 +141,7 @@ function wpsa_subscribe_author_handle(){
 		else{
 			// subscribe process
 			$wpsamodel->subscribeAuthorbyEmail($author_id, $subscriber_email);
-			echo json_encode(array('status'=>1));
+			echo json_encode(array('status'=>1,'message'=>'Your subscribed sucessfully'));
 		}
 		
 		
