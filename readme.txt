@@ -4,7 +4,7 @@ Donate link: http://code-cocktail.in/donate-me/
 Tags: user, author, email, notification, notify, posts, subscribe, subscription
 Requires at least: 2.8
 Tested up to: 3.9.1
-Stable tag: 1.6
+Stable tag: 1.6.1
 License: GPLv2
 
 Wp Subscribe Author plugin is help subscriber to follow his/her favorite author.
@@ -53,6 +53,9 @@ Plugin will automatically find the author link and display the pop card. Author 
 * Nice authour url also automitcally work now.
 = 1.6 =
 * Guest user subscription option added.
+= 1.6.1 =
+* Bug fix: ajax loading text added
+
 
 == Upgrade Notice ==
 
