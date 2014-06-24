@@ -47,25 +47,24 @@ jQuery(function($){
 			 
 	        	 authorID = $.getAuthorID(authorURL);
 			 
-			 if (authorID == 0 || typeof(authorID) =="undefined" ) {
+	        	 if (authorID == 0 || typeof(authorID) =="undefined" ) {
 				
-				authorID = $this.attr('data-authorID');
-			 }
+	        		 authorID = $this.attr('data-authorID');
+	        	 }
 		
 			 
-			 if (authorID == 0 || typeof(authorID) =="undefined") {
-				// remove trailing slash from author url
-				 if(authorURL.substr(-1) == '/') {					 
-					authorURL = authorURL.substr(0, authorURL.length - 1);
-					
-				 }
+	        	 if (authorID == 0 || typeof(authorID) =="undefined") {
+	        		 // remove trailing slash from author url
+	        		 if(authorURL.substr(-1) == '/') {					 
+	        			 authorURL = authorURL.substr(0, authorURL.length - 1);					
+	        		 }
 				
 				  
-				authorID = authorURL.split('/').pop(); // nice name from url
+	        		 authorID = authorURL.split('/').pop(); // nice name from url
 			
-			 }
+	        	 }
 			 		
-			 
+	        	 $this.find(".wpsa-authorInfo").html('loading...');
 			
 
 	     		$.get(wpsa_ajax_suport.ajaxurl,({action:'wpsa_getauthor_action','authorID':authorID}),function(response){
@@ -74,6 +73,7 @@ jQuery(function($){
 	    	        
 	    		});		        	 
 	     	
+	     		//return false;
 	        }
 	    });
 	    
