@@ -3,7 +3,7 @@
 Plugin Name: Wp Subscribe Author
 Plugin URI: http://wordpress.org/extend/plugins/wp-subscribe-author/
 Description: Wp Subscribe Author plugin is help subscriber to follow his/her favourite author. Once subscriber starts follow the author, he will get notified all new post of author by email.
-Version: 1.6.1
+Version: 1.6.5
 Author: Gowri Sankar Ramasamy
 Author URI: http://code-cocktail.in/author/gowrisankar/
 Donate link: http://code-cocktail.in/donate-me/
@@ -12,7 +12,7 @@ Text Domain: wp-subscribe-author
 */
 
 /*  
-	Copyright 2012  Gowri Sankar Ramasamy  (email : gchokeen@gmail.com)
+	Copyright 2014  Gowri Sankar Ramasamy  (email : gchokeen@gmail.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -35,7 +35,7 @@ Text Domain: wp-subscribe-author
 
 require_once (dirname(__FILE__) . '/classes/Model/wpsa_model.php');
 require_once (dirname(__FILE__) . '/classes/wpsa_template.php');
-//require_once (dirname(__FILE__) . '/classes/wpsa_shortcode.php');
+require_once (dirname(__FILE__) . '/classes/wpsa_shortcode.php');
 
 require_once (dirname(__FILE__) . '/wpsa-ajax.php');
 require_once (dirname(__FILE__) . '/wpsa-unsubscribe.php');
@@ -43,7 +43,7 @@ require_once (dirname(__FILE__) . '/wpsa-unsubscribe.php');
 
 define('WPSA_PLUGIN_NAME', plugin_basename(__FILE__));
 define('WPSA_PLUGIN_DIR', dirname(__FILE__) . DIRECTORY_SEPARATOR);
-define('WPSA_PLUGIN_VERSION','2.0');
+define('WPSA_PLUGIN_VERSION','1.6.5');
 
 if (!class_exists('Wp_Subscribe_Author')) {
 

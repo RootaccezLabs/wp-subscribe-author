@@ -121,7 +121,18 @@ class Wpsa_Model{
 
 	}  
 
+	/*
+	 * @method getFavouriteAuthors will extract the favourite author ids of subscriber
+	 * @param int $subscriber_id
+	 * @since 1.6.5
+	 * @return object
+	 */	
+	public function getFavouriteAuthors($subscriber_id){		
+		global $wpdb;
+		
+		return $authors = $wpdb->get_results($wpdb->prepare( "SELECT author_id FROM $this->tbl_wpsa_subscribe_author WHERE subscriber_id = %d AND status = %s",$subscriber_id,'active'));
 
+	}
 	
 
 }

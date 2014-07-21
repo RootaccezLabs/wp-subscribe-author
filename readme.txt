@@ -4,7 +4,7 @@ Donate link: http://code-cocktail.in/donate-me/
 Tags: user, author, email, notification, notify, posts, subscribe, subscription
 Requires at least: 2.8
 Tested up to: 3.9.1
-Stable tag: 1.6.1
+Stable tag: 1.6.5
 License: GPLv2
 
 Wp Subscribe Author plugin is help subscriber to follow his/her favorite author.
@@ -15,6 +15,8 @@ Wp Subscribe Author plugin is help subscriber to follow his/her favorite author.
 How it works ?
 
 Please check the FAQ section.
+
+Display subscriber favourite author posts using this shortcode **[favourite-author-posts]** - It will work only for logged in subscribers!
 
 
 == Installation ==
@@ -36,8 +38,11 @@ e.g.
 Plugin will automatically find the author link and display the pop card. Author link should contain the rel="author" attribute. If it's not working please add the 'data-authorID="<?php echo get_the_author_meta('ID'); ?>"' to author link.
 
 = Can Guest user subcribe author post ? =
- yep, plugin supports guest user subscription option from verion 1.6 .
+Yes, plugin supports guest user subscription option from verion 1.6 .
  
+ = Can I customize the favourite author posts template ? =
+ Yes, we can customize the template. You can create your custom code template on your active theme with the name **content-favourite-author-posts.php**. If you don't create this file, plugin will find the **content.php** from your active
+ wordpress theme.
  
 
 == Changelog ==
@@ -45,7 +50,7 @@ Plugin will automatically find the author link and display the pop card. Author 
 = 1.0 =
 * Initial release.
 = 1.1 =
-* english translation support added.
+* English translation support added.
 = 1.5 =
 * Object Oriented Programming style.
 * tipTips jquery plugin replaced by hovercard query plug-in. 
@@ -55,7 +60,8 @@ Plugin will automatically find the author link and display the pop card. Author 
 * Guest user subscription option added.
 = 1.6.1 =
 * Bug fix: ajax loading text added
-
+= 1.6.5 =
+* Shortcode added to display subscriber favourite author posts
 
 == Upgrade Notice ==
 
