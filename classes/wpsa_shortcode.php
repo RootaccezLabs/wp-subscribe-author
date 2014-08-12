@@ -31,7 +31,8 @@ if (!class_exists('WPSA_Shortcode')) {
 				foreach($authors as $author){
 					$author_ids[] = $author->author_id;
 				}
-
+				
+				
 				$args = array( 'author__in' => $author_ids );
 				
 				
@@ -55,7 +56,8 @@ if (!class_exists('WPSA_Shortcode')) {
 			}
 			return $html;
 		}
-
+		
+		
 		
 		private function load_template_part($template_name, $part_name=null) {
 			ob_start();

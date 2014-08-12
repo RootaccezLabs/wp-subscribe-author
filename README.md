@@ -6,7 +6,7 @@ Wp Subscribe Author plugin is help subscriber to follow his/her favorite author.
 Currently Working
 =================
 
-Adding the [subscribe feature for not logged in user](https://github.com/RootaccezLabs/wp-subscribe-author/issues/4) for version. It will be availble in 1.6 version release!
+Adding the [Options page & user page](https://github.com/RootaccezLabs/wp-subscribe-author/issues/8) for version. It will be availble in 1.6 version release!
 
 
 More

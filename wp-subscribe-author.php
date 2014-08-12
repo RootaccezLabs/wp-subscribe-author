@@ -32,6 +32,9 @@ Text Domain: wp-subscribe-author
 // loads language files
 
 
+define('WPSA_PLUGIN_NAME', plugin_basename(__FILE__));
+define('WPSA_PLUGIN_DIR', dirname(__FILE__) . DIRECTORY_SEPARATOR);
+define('WPSA_PLUGIN_VERSION','1.6.5');
 
 require_once (dirname(__FILE__) . '/classes/Model/wpsa_model.php');
 require_once (dirname(__FILE__) . '/classes/wpsa_template.php');
@@ -41,9 +44,6 @@ require_once (dirname(__FILE__) . '/wpsa-ajax.php');
 require_once (dirname(__FILE__) . '/wpsa-unsubscribe.php');
 
 
-define('WPSA_PLUGIN_NAME', plugin_basename(__FILE__));
-define('WPSA_PLUGIN_DIR', dirname(__FILE__) . DIRECTORY_SEPARATOR);
-define('WPSA_PLUGIN_VERSION','1.6.5');
 
 if (!class_exists('Wp_Subscribe_Author')) {
 
