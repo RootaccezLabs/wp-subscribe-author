@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/RootaccezLabs/wp-subscribe-author.png?label=ready&title=Ready)](https://waffle.io/RootaccezLabs/wp-subscribe-author)
 wp-subscribe-author
 ===================
 
