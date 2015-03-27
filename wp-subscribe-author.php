@@ -39,6 +39,8 @@ define('WPSA_PLUGIN_VERSION','1.6.5');
 require_once (dirname(__FILE__) . '/classes/Model/wpsa_model.php');
 require_once (dirname(__FILE__) . '/classes/wpsa_template.php');
 require_once (dirname(__FILE__) . '/classes/wpsa_shortcode.php');
+require_once (dirname(__FILE__) . '/classes/settings.php');
+
 
 require_once (dirname(__FILE__) . '/wpsa-ajax.php');
 require_once (dirname(__FILE__) . '/wpsa-unsubscribe.php');

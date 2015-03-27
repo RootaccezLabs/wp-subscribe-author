@@ -8,8 +8,6 @@ class Settings_API_Tabs_WPSA_Plugin{
 	 * when registering settings
 	 */
 	private $wpsa_general_settings_key = 'wpsa_general_settings';
-	private $wpsa_template_settings_key = 'wpsa_template_settings';
-	private $wpsa_help_settings_key = 'wpsa_help_settings';
 	private $plugin_options_key = 'wpsa_plugin_options';
 	private $plugin_settings_tabs = array();
 
@@ -19,11 +17,9 @@ class Settings_API_Tabs_WPSA_Plugin{
 	 * current ones speak for themselves.
 	 */
 	function __construct() {
-		parent::__construct();
+	
 		add_action( 'init', array( &$this, 'load_settings' ) );
 		add_action( 'admin_init', array( &$this, 'register_wpsa_general_settings' ) );
-		add_action( 'admin_init', array( &$this, 'register_wpsa_template_settings' ) );
-		add_action( 'admin_init', array( &$this, 'register_wpsa_help_settings' ) );
 		add_action( 'admin_menu', array( &$this, 'add_admin_menus' ) );
 		
 		add_filter( 'plugin_action_links_'.WPSA_PLUGIN_NAME, array( &$this, 'pluginSettingsLink' ) );
@@ -41,8 +37,7 @@ class Settings_API_Tabs_WPSA_Plugin{
 	 */
 	function load_settings() {
 		$this->wpsa_general_settings = (array) get_option( $this->wpsa_general_settings_key );
-		$this->wpsa_template_settings = (array) get_option( $this->wpsa_template_settings_key );
-		$this->wpsa_help_settings = (array) get_option( $this->wpsa_help_settings_key );
+
 
 	}
 	
@@ -54,35 +49,12 @@ class Settings_API_Tabs_WPSA_Plugin{
 		$this->plugin_settings_tabs[$this->wpsa_general_settings_key] = __('General','wp-subscribe-author');
 		
 		register_setting( $this->wpsa_general_settings_key, $this->wpsa_general_settings_key );
-		add_settings_section( 'wpsa_section_general',__('WPSA Profit Plugin','wp-subscribe-author'), array( &$this, 'wpsa_section_general_desc' ), $this->wpsa_general_settings_key );
-		add_settings_field( 'wpsa_featured_product',__('Default Number of Featured Products','wp-subscribe-author') , array( &$this, 'field_wpsa_featured_product' ), $this->wpsa_general_settings_key, 'wpsa_section_general' );
+		add_settings_section( 'wpsa_section_general',__('General Settings','wp-subscribe-author'), array( &$this, 'wpsa_section_general_desc' ), $this->wpsa_general_settings_key );
+		add_settings_field( 'show_on_card',__('Show on card','wp-subscribe-author') , array( &$this, 'field_show_on_card' ), $this->wpsa_general_settings_key, 'wpsa_section_general' );
 		
 	}
 
-	/*
-	 * Registers the general settings via the Settings API,
-	 * appends the setting to the tabs array of the object.
-	 */
-	function register_wpsa_template_settings() {
-		$this->plugin_settings_tabs[$this->wpsa_template_settings_key] = __('Advanced','wp-subscribe-author');
-		
-		register_setting( $this->wpsa_template_settings_key, $this->wpsa_template_settings_key,array(&$this,'wpsa_template_settings_callback') );
-		add_settings_section( 'wpsa_section_advanced',__('WPSA Profit Plugin','wp-subscribe-author'), array( &$this, 'wpsa_section_template_desc' ), $this->wpsa_template_settings_key );
-	
-		
-	}
 
-	
-	
-	function register_wpsa_help_settings(){
-		
-		$this->plugin_settings_tabs[$this->wpsa_help_settings_key] = __('Help','wp-subscribe-author');
-
-		register_setting( $this->wpsa_help_settings_key, $this->wpsa_help_settings_key);
-		add_settings_section( 'wpsa_section_buyitnow',__('Buy it Now Links','wp-subscribe-author'), array( &$this, 'wpsa_section_help_desc' ), $this->wpsa_help_settings_key );
-
-		
-	}
 	
 	
 	
@@ -94,30 +66,32 @@ class Settings_API_Tabs_WPSA_Plugin{
 	function wpsa_section_general_desc() { echo ''; }
 	
 	
-	function wpsa_section_template_desc() {
-		echo '';
-	}
 
-	function wpsa_section_help_desc(){
-		echo '';
-	
-	}
 	
 	/*
 	 * General Option field callback, renders a
 	 * text input, note the name and value.
 	 */
-	function field_wpsa_featured_product() {
+	function field_show_on_card() {
             
-            $wpsa_featured_product = (isset($this->wpsa_general_settings['wpsa_featured_product'])?esc_attr( $this->wpsa_general_settings['wpsa_featured_product'] ):'6');
+            $show_on_card = (isset($this->wpsa_general_settings['show_on_card'])?( $this->wpsa_general_settings['show_on_card'] ):'');
             
+	    $fields = array('first_name'=>'First Name','last_name'=>'Last Name','nickname'=>'Nick Name','description'=>'About');
+	    
+	    
 		?>
-	     <select name="<?php echo $this->wpsa_general_settings_key; ?>[wpsa_featured_product]">
-                        <option value=""><?php echo __('Choose','wp-subscribe-author') ?></option>
-                       <?php foreach($this->num_featured_products as $num_featured_product): ?>
-                                <option value="<?php echo $num_featured_product; ?>" <?php selected($num_featured_product,$wpsa_featured_product); ?>><?php echo $num_featured_product; ?></option>
-                       <?php endforeach; ?>	 
-            </select>
+		
+		<ul>
+			<?php foreach($fields as $key=>$row){ ?>
+				
+				<li><input type="checkbox" name="<?php echo $this->wpsa_general_settings_key; ?>[show_on_card][<?php echo $key; ?>]" value="<?php echo $key; ?>" <?php  echo (!empty($show_on_card[$key])?'checked="checked"':''); ?> /><label><?php echo $row; ?></label></li>
+				
+			<?php } ?>
+			
+			
+		</ul>
+		
+
            
 		<?php
 	}
