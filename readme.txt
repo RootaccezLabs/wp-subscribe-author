@@ -3,8 +3,8 @@ Contributors: gchokeen
 Donate link: http://code-cocktail.in/donate-me/
 Tags: user, author, email, notification, notify, posts, subscribe, subscription
 Requires at least: 2.8
-Tested up to: 3.9.1
-Stable tag: 1.6.5
+Tested up to: 4.3.1
+Stable tag: 1.7
 License: GPLv2
 
 Wp Subscribe Author plugin is help subscriber to follow his/her favorite author.
@@ -62,6 +62,8 @@ Yes, plugin supports guest user subscription option from verion 1.6 .
 * Bug fix: ajax loading text added
 = 1.6.5 =
 * Shortcode added to display subscriber favourite author posts
+= 1.7 =
+* Admin settings for card & email
 
 == Upgrade Notice ==
 

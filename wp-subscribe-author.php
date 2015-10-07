@@ -3,7 +3,7 @@
 Plugin Name: Wp Subscribe Author
 Plugin URI: http://wordpress.org/extend/plugins/wp-subscribe-author/
 Description: Wp Subscribe Author plugin is help subscriber to follow his/her favourite author. Once subscriber starts follow the author, he will get notified all new post of author by email.
-Version: 1.6.5
+Version: 1.7
 Author: Gowri Sankar Ramasamy
 Author URI: http://code-cocktail.in/author/gowrisankar/
 Donate link: http://code-cocktail.in/donate-me/
@@ -204,6 +204,9 @@ if (!class_exists('Wp_Subscribe_Author')) {
 				}
 				
 				update_option("wpsa_subscribe_author_db_version", WPSA_PLUGIN_VERSION);
+				
+				
+				
 
 			}
 
@@ -262,15 +265,19 @@ if (!class_exists('Wp_Subscribe_Author')) {
 						$postMessage = $template->renderTemplate('default',$param);
 					
 					
+						$mail_settings = get_option('wpsa_mail_settings');
 					
 						$parse = parse_url(get_option('siteurl'));
 						$blog_host = $parse['host'];
+						
+						$sender_name = (!empty($mail_settings['sender_name'])?$mail_settings['sender_name']:get_bloginfo('name'));
+						$sender_email = "no-reply@".$blog_host;
 					
 						$headers = '';
 						
 						$headers  = "MIME-Version: 1.0" . "\r\n";
 						$headers .= "Content-type: text/html; charset=".get_bloginfo('charset')."" . "\r\n";
-						$headers .= "From: ".get_bloginfo('name')." <no-reply@".$blog_host.">" . "\r\n";
+						$headers .= "From: ".$sender_name." <".$sender_email.">" . "\r\n";
 						
 						$subject ="New Post From $Author_name";
 						

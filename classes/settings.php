@@ -8,6 +8,7 @@ class Settings_API_Tabs_WPSA_Plugin{
 	 * when registering settings
 	 */
 	private $wpsa_general_settings_key = 'wpsa_general_settings';
+	private $wpsa_mail_settings_key = 'wpsa_mail_settings';
 	private $plugin_options_key = 'wpsa_plugin_options';
 	private $plugin_settings_tabs = array();
 
@@ -20,6 +21,7 @@ class Settings_API_Tabs_WPSA_Plugin{
 	
 		add_action( 'init', array( &$this, 'load_settings' ) );
 		add_action( 'admin_init', array( &$this, 'register_wpsa_general_settings' ) );
+		add_action( 'admin_init', array( &$this, 'register_wpsa_mail_settings' ) );
 		add_action( 'admin_menu', array( &$this, 'add_admin_menus' ) );
 		
 		add_filter( 'plugin_action_links_'.WPSA_PLUGIN_NAME, array( &$this, 'pluginSettingsLink' ) );
@@ -37,7 +39,7 @@ class Settings_API_Tabs_WPSA_Plugin{
 	 */
 	function load_settings() {
 		$this->wpsa_general_settings = (array) get_option( $this->wpsa_general_settings_key );
-
+		$this->wpsa_mail_settings = (array) get_option( $this->wpsa_mail_settings_key );
 
 	}
 	
@@ -54,7 +56,20 @@ class Settings_API_Tabs_WPSA_Plugin{
 		
 	}
 
+	
+	function register_wpsa_mail_settings() {
+		$this->plugin_settings_tabs[$this->wpsa_mail_settings_key] = __('Mail','wp-subscribe-author');
+		
+		register_setting( $this->wpsa_mail_settings_key, $this->wpsa_mail_settings_key );
+		add_settings_section( 'wpsa_section_mail',__('Mail Settings','wp-subscribe-author'), array( &$this, 'wpsa_section_mail_desc' ), $this->wpsa_mail_settings_key );
+		add_settings_field( 'sender_name',__('Sender Name','wp-subscribe-author') , array( &$this, 'field_sender_name' ), $this->wpsa_mail_settings_key, 'wpsa_section_mail' );
+		add_settings_field( 'sender_email',__('Sender Email','wp-subscribe-author') , array( &$this, 'field_sender_email' ), $this->wpsa_mail_settings_key, 'wpsa_section_mail' );
+		
+	}	
 
+	
+	
+	
 	
 	
 	
@@ -64,6 +79,7 @@ class Settings_API_Tabs_WPSA_Plugin{
 	 * with add_settings_section
 	 */
 	function wpsa_section_general_desc() { echo ''; }
+	function wpsa_section_mail_desc() { echo ''; }
 	
 	
 
@@ -97,6 +113,31 @@ class Settings_API_Tabs_WPSA_Plugin{
 	}
 
   
+	function field_sender_name(){
+		$sender_name = (isset($this->wpsa_mail_settings['sender_name'])?( $this->wpsa_mail_settings['sender_name'] ):get_bloginfo('name'));
+		
+		
+		?>
+		<input type="text" name="<?php echo $this->wpsa_mail_settings_key; ?>[sender_name]" value="<?php echo $sender_name; ?>" />
+		<?php 
+	}
+	
+	
+	function field_sender_email(){
+		
+		$parse = parse_url(get_option('siteurl'));
+		$blog_host = $parse['host'];
+		$default_sender_email = "no-reply@".$blog_host;
+						
+						
+		$sender_email = (isset($this->wpsa_mail_settings['sender_email'])?( $this->wpsa_mail_settings['sender_email'] ):$default_sender_email);
+		
+		
+		?>
+		<input type="email" name="<?php echo $this->wpsa_mail_settings_key; ?>[sender_email]" value="<?php echo $sender_email; ?>" />
+		<?php 
+	}	
+	
 
 
 	

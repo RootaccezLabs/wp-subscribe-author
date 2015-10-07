@@ -5,10 +5,10 @@
 function wpsa_ajax_suport(){
 
 	add_action( 'wp_ajax_wpsa_getauthor_action', 'wpsa_getauthor_action_handle' );
-    add_action( 'wp_ajax_nopriv_wpsa_getauthor_action', 'wpsa_getauthor_action_handle' );  // need this to serve non logged in users
+	add_action( 'wp_ajax_nopriv_wpsa_getauthor_action', 'wpsa_getauthor_action_handle' );  // need this to serve non logged in users
 
-    add_action( 'wp_ajax_wpsa_subscribe_author', 'wpsa_subscribe_author_handle' );
-    add_action( 'wp_ajax_nopriv_wpsa_subscribe_author', 'wpsa_subscribe_author_handle' );  // need this to serve non logged in users
+	add_action( 'wp_ajax_wpsa_subscribe_author', 'wpsa_subscribe_author_handle' );
+	add_action( 'wp_ajax_nopriv_wpsa_subscribe_author', 'wpsa_subscribe_author_handle' );  // need this to serve non logged in users
     
 }
 add_action( 'init', 'wpsa_ajax_suport' );
@@ -42,8 +42,18 @@ function wpsa_getauthor_action_handle(){
 	
 	$num_subscribers =  $wpsamodel->get_num_subscribers($authorID);
 	
+	$general_settings = (array)get_option('wpsa_general_settings');
 
-	$allowed = array('first_name','last_name','nickname','description');
+	if(!empty($general_settings['show_on_card'])){
+		$show_on_card = array_keys($general_settings['show_on_card']);
+	}
+	else{
+		$show_on_card = array('first_name');
+	}
+	
+	
+	
+
 	?>
 			<?php 
 		add_filter('get_avatar','change_avatar_css');		
@@ -53,7 +63,7 @@ function wpsa_getauthor_action_handle(){
 		<ul style="list-style:none;">
 			<?php foreach ($UserDetails as $meta=>$value): ?>
 		
-			<?php  if(in_array($meta, $allowed)): ?>
+			<?php  if(in_array($meta, $show_on_card)): ?>
 				<li class="<?php echo $meta; ?>"><?php echo $value[0]; ?></li>
 				<?php endif; ?>
 			<?php endforeach;?>
@@ -122,12 +132,12 @@ function wpsa_subscribe_author_handle(){
 		if($wpsamodel->is_user_subscribed($author_id, $subscriber_id)){
 			//unsubscribe
 			$wpsamodel->unsubscribeAuthor($author_id, $subscriber_id);
-			echo json_encode(array('status'=>0,'message'=>'Your unsubscribed successfully'));
+			echo json_encode(array('status'=>0,'message'=>'You have successfully unsubscribed'));
 		}
 		else{
 			//subscribe
 			$wpsamodel->subscribeAuthor($author_id, $subscriber_id);
-			echo json_encode(array('status'=>1,'message'=>'Your subscribed successfully'));
+			echo json_encode(array('status'=>1,'message'=>'You have successfully subscribed'));
 		}
 
 	}
@@ -135,13 +145,13 @@ function wpsa_subscribe_author_handle(){
 		
 		if($wpsamodel->is_user_subscribed_by_email($author_id, $subscriber_email)){
 			
-			echo json_encode(array('status'=>2,'message'=>'You already subscribed this author!'));
+			echo json_encode(array('status'=>2,'message'=>'You have already subscribed this author!'));
 
 		}
 		else{
 			// subscribe process
 			$wpsamodel->subscribeAuthorbyEmail($author_id, $subscriber_email);
-			echo json_encode(array('status'=>1,'message'=>'Your subscribed successfully'));
+			echo json_encode(array('status'=>1,'message'=>'You have successfully subscribed'));
 		}
 		
 		
