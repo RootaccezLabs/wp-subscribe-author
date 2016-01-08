@@ -78,8 +78,9 @@ jQuery(function($){
 	    });
 	    
 	    	    
-	    $(document).on('click','.wpsa-subscribe-btn',function(){	
-	    	 var userID,authorID,$this,subscriber_email=0;
+	    $(document).on('click','.wpsa-subscribe-btn',function(){
+		
+	    	 var userID,authorID,$this,subscriber_email=0,doaction;
 	    	 $this = $(this);
 	    	 userID = $this.attr("data-userID");
 	    	 var message = $(".wpsa-message");
@@ -99,21 +100,24 @@ jQuery(function($){
 
 	  
 	    	 authorID = $this.attr("data-authorID");
+		 doaction = $this.attr("data-doaction");
 	    	 
-	     	$.post(wpsa_ajax_suport.ajaxurl,({action:'wpsa_subscribe_author','author_id':authorID,'subscriber_id':userID,'subscriber_email':subscriber_email}),function(response){
+	     	$.post(wpsa_ajax_suport.ajaxurl,({action:'wpsa_subscribe_author','author_id':authorID,'subscriber_id':userID,'subscriber_email':subscriber_email,'doaction':doaction}),function(response){
 	     		response = $.parseJSON(response);
 	     		
 	     		if(response.status == 2){	     			
-	     			message.html(response.message).delay('2000').fadeOut('slow');
-	     		}	     		
-     			if(response.status==0){
-    	        	$this.text("Subscribe");
-    	        	message.html(response.message).delay('2000').fadeOut('slow');
-    	        }
-    	        else{
-    	        	$this.text("Unsubscribe");
-    	        	message.html(response.message).delay('2000').fadeOut('slow');
-    	        }
+	     			message.html(response.message).show().delay('2000').fadeOut('slow');
+	     		}
+			
+			if(response.status==0){
+				$this.text("Subscribe");
+				message.html(response.message).show().delay('2000').fadeOut('slow');
+			}
+			else{
+				$this.attr('data-doaction','unsubscribe');
+				$this.text("Unsubscribe");
+				message.html(response.message).show().delay('2000').fadeOut('slow');
+			}
 	     	    	
 	    	        
 	    	});		

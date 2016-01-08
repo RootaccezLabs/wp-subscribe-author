@@ -10,11 +10,14 @@ if (!class_exists('WPSA_Shortcode')) {
 		
 			## Register shortcodes
 			add_shortcode( 'favourite-author-posts', array(&$this, 'favourite_author_posts_handler' ) );
+			add_shortcode( 'subscribe-author-button', array(&$this, 'subscribe_author_button_handler' ) );
 			
 			$this->wpsamodel = new Wpsa_Model();
 		
 		}	
-
+		/*
+		 * [favourite-author-posts] shortcode handler
+		 */
 		public function  favourite_author_posts_handler($atts){
 		
 			$html = '';
@@ -58,6 +61,84 @@ if (!class_exists('WPSA_Shortcode')) {
 		}
 		
 		
+		
+		
+		/*
+		 * [subscribe-author-button] shortcode handler
+		 * Use this shortcode to display the subscribe author button on pages/post
+		 */
+		public function subscribe_author_button_handler($atts){
+			
+			$html = '';
+			
+			$authorID =  $_GET['authorID'];
+			
+			$authorID = get_the_author_meta('ID');
+			
+			
+			
+			if(!is_numeric($authorID)){
+				$authorID = $this->wpsamodel->getAuthorIDbyNicename($authorID);
+			}
+			
+			
+			
+			$user_id = get_current_user_id();
+			
+			
+			$num_subscribers =  $this->wpsamodel->get_num_subscribers($authorID);
+	
+	
+			
+			if($authorID != 0){
+				$html  .= '<div class="wpsa-button-wrap">';
+				
+				$first_name = get_the_author_meta('first_name');
+				
+			
+				if($user_id !=0 || ($user_id ==0 && $user_id != $authorID)){
+					$html  .= '<h4>'.__('Subscribe this author','wp-subscribe-author').'</h4>';
+					//$html  .= '<span>'.sprintf(_n('%1$s having %2$s Subscriber','%1$s having %2$s Subscribers',ucfirst($first_name),$num_subscribers,"wp-subscribe-author"),ucfirst($first_name),$num_subscribers).'</span>';	
+				}
+				
+				$html  .= '<div class="wpsa-footer">';
+			
+			
+				if($user_id ==0){
+			
+					$html  .= '<input type="email" name="wpsa-subcriber-mail" id="wpsa-subcriber-mail" value="" placeholder="'. __('Enter your email to subscribe with author','wp-subscribe-author').'"> 
+					<button class="wpsa-subscribe-btn" data-authorID="'.$authorID.'" data-userID="0">'.__('Subscribe','wp-subscribe-author').'</button>';
+			
+				
+				}	
+				else if($user_id != $authorID){ 
+					if($this->wpsamodel->is_user_subscribed($authorID, $user_id)){
+						//unsubscribe
+						$btn_txt = __('Unsubscribe','wp-subscribe-author');
+				
+					}
+					else{
+						//subscribe
+						$btn_txt = __('Subscribe','wp-subscribe-author');
+		
+					}
+					
+		
+					$html  .= '<button class="wpsa-subscribe-btn" data-authorID="'.$authorID.'" data-userID="'.$user_id.'" >'.$btn_txt.'</button>';
+					
+					
+					
+				}
+				$html  .= '<div class="wpsa-message"></div>';
+				$html  .= '</div>';
+				$html  .= '</div>';
+			
+			}
+			
+			
+			return $html;
+		
+		}
 		
 		private function load_template_part($template_name, $part_name=null) {
 			ob_start();

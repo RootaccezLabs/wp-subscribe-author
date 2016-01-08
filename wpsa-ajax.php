@@ -132,12 +132,12 @@ function wpsa_subscribe_author_handle(){
 		if($wpsamodel->is_user_subscribed($author_id, $subscriber_id)){
 			//unsubscribe
 			$wpsamodel->unsubscribeAuthor($author_id, $subscriber_id);
-			echo json_encode(array('status'=>0,'message'=>'You have successfully unsubscribed'));
+			echo json_encode(array('status'=>0,'message'=>'You have successfully unsubscribed!'));
 		}
 		else{
 			//subscribe
 			$wpsamodel->subscribeAuthor($author_id, $subscriber_id);
-			echo json_encode(array('status'=>1,'message'=>'You have successfully subscribed'));
+			echo json_encode(array('status'=>1,'message'=>'You have successfully subscribed!'));
 		}
 
 	}
@@ -145,13 +145,20 @@ function wpsa_subscribe_author_handle(){
 		
 		if($wpsamodel->is_user_subscribed_by_email($author_id, $subscriber_email)){
 			
+			if(!empty($_POST['doaction']) && $_POST['doaction'] == 'unsubscribe'){
+				
+				$wpsamodel->unsubscribeAuthorbyEmail($author_id, $subscriber_email);
+				echo json_encode(array('status'=>0,'message'=>'You have successfully unsubscribed!'));
+			die();
+			}
+			
 			echo json_encode(array('status'=>2,'message'=>'You have already subscribed this author!'));
 
 		}
 		else{
 			// subscribe process
 			$wpsamodel->subscribeAuthorbyEmail($author_id, $subscriber_email);
-			echo json_encode(array('status'=>1,'message'=>'You have successfully subscribed'));
+			echo json_encode(array('status'=>1,'message'=>'You have successfully subscribed!'));
 		}
 		
 		

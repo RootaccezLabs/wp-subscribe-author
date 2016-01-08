@@ -4,7 +4,7 @@ Donate link: http://code-cocktail.in/donate-me/
 Tags: user, author, email, notification, notify, posts, subscribe, subscription
 Requires at least: 2.8
 Tested up to: 4.3.1
-Stable tag: 1.7
+Stable tag: 1.8
 License: GPLv2
 
 Wp Subscribe Author plugin is help subscriber to follow his/her favorite author.
@@ -16,7 +16,8 @@ How it works ?
 
 Please check the FAQ section.
 
-Display subscriber favourite author posts using this shortcode **[favourite-author-posts]** - It will work only for logged in subscribers!
+1. Display subscriber favourite author posts using this shortcode **[favourite-author-posts]** - It will work only for logged in subscribers!
+2. Use this shortcode to display the subscribe author button on pages/post **[subscribe-author-button]**
 
 
 == Installation ==
@@ -64,6 +65,8 @@ Yes, plugin supports guest user subscription option from verion 1.6 .
 * Shortcode added to display subscriber favourite author posts
 = 1.7 =
 * Admin settings for card & email
+= 1.8 =
+* Shortcode added to display subscribe author button on pages/post
 
 == Upgrade Notice ==
 
