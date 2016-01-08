@@ -4,8 +4,10 @@ $author_id = $data['data']['author_id'];
 $subscriber_email = $data['data']['subscriber_email'];
 
 $post = get_post( $post_id );
-$post_title = $post->post_title;
-$post_content = wp_trim_words( $post->post_content );
+
+$post_url = esc_url(get_permalink($post_id));
+$post_title = apply_filters('the_title', $post->post_title);
+$post_content = apply_filters('the_content', $post->post_content);
 
 $author_name = get_userdata($author_id)->display_name;
 $blogname = get_bloginfo('name');
@@ -390,7 +392,7 @@ $blogname
 <td valign="top">
 <div mc:edit="std_content00">
 <h2 class="h2">New Post From $author_name</h2>
-<h3 class="h3">$post_title</h3>
+<h3 class="h3"><a href="$post_url">$post_title</a></h3>
 $post_content
 <br />
 </div>
