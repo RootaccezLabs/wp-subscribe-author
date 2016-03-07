@@ -96,10 +96,11 @@ if (!class_exists('WPSA_Shortcode')) {
 				$first_name = get_the_author_meta('first_name');
 				
 			
-				if($user_id !=0 || ($user_id ==0 && $user_id != $authorID)){
+				if(($user_id !=0 && $user_id != $authorID) || $user_id==0 ){
 					$html  .= '<h4>'.__('Subscribe this author','wp-subscribe-author').'</h4>';
 					//$html  .= '<span>'.sprintf(_n('%1$s having %2$s Subscriber','%1$s having %2$s Subscribers',ucfirst($first_name),$num_subscribers,"wp-subscribe-author"),ucfirst($first_name),$num_subscribers).'</span>';	
 				}
+				
 				
 				$html  .= '<div class="wpsa-footer">';
 			
@@ -107,7 +108,7 @@ if (!class_exists('WPSA_Shortcode')) {
 				if($user_id ==0){
 			
 					$html  .= '<input type="email" name="wpsa-subcriber-mail" id="wpsa-subcriber-mail" value="" placeholder="'. __('Enter your email to subscribe with author','wp-subscribe-author').'"> 
-					<button class="wpsa-subscribe-btn" data-authorID="'.$authorID.'" data-userID="0">'.__('Subscribe','wp-subscribe-author').'</button>';
+						   <button class="wpsa-subscribe-btn" data-authorID="'.$authorID.'" data-userID="0">'.__('Subscribe','wp-subscribe-author').'</button>';
 			
 				
 				}	

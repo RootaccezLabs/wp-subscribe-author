@@ -26,7 +26,7 @@ class Wpsa_Template {
 				
 		
 		ob_start ();
-		include_once $file;
+		include $file;
 	 	$output = ob_get_contents ();
 		ob_end_clean ();
 		
